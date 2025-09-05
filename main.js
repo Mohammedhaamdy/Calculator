@@ -7,13 +7,21 @@ let num1, num2, prevOper, result;
 // writing nums on display
 buttons.forEach((btn) => {
   btn.addEventListener("click", function () {
-    if (display.value === "0") {
-      display.value = btn.innerText;
-    } else {
-      display.value += btn.innerText;
-    }
+    displayingNums(this.innerText);
   });
 });
+
+function displayingNums(val) {
+  if (display.value === "0") {
+    display.value = val;
+  } else if (val === ".") {
+    if (!display.value.includes(".")) {
+      display.value += ".";
+    }
+  } else {
+    display.value += val;
+  }
+}
 
 // operation buttons
 operatorButton.forEach((btn) => {
