@@ -2,7 +2,7 @@ const buttons = document.querySelectorAll(".button");
 const display = document.querySelector(".display");
 const operatorButton = document.querySelectorAll(".operation");
 
-let num1, num2, prevOper;
+let num1, num2, prevOper, result;
 
 // writing nums on display
 buttons.forEach((btn) => {
@@ -22,11 +22,11 @@ operatorButton.forEach((btn) => {
   });
 });
 
-
 function handleOperation(value) {
   switch (value) {
     case "C":
       display.value = "";
+      num1 = 0;
       break;
     case "←":
       display.value = display.value.slice(0, -1);
@@ -35,24 +35,32 @@ function handleOperation(value) {
     case "−":
     case "/":
     case "×":
-      num1 = parseInt(display.value);
+      num1 = parseFloat(display.value);
       display.value = "0";
       prevOper = value;
       break;
     case "=":
-      num2 = parseInt(display.value);
+      num2 = parseFloat(display.value);
       calculation();
   }
 }
 
 function calculation() {
   if (prevOper === "+") {
-    display.value = num1 + num2;
+    result = num1 + num2;
   } else if (prevOper === "−") {
-    display.value = num1 - num2;
+    result = num1 - num2;
   } else if (prevOper === "/") {
-    display.value = num1 / num2;
+    if (num2 === 0) {
+      result = "Error";
+    } else {
+      result = num1 / num2;
+    }
   } else if (prevOper === "×") {
-    display.value = num1 * num2;
+    result = num1 * num2;
   }
+  if (result === undefined) {
+    result = "Error";
+  }
+  display.value = result;
 }
