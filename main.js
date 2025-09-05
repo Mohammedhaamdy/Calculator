@@ -54,18 +54,22 @@ function handleOperation(value) {
 }
 
 function calculation() {
-  if (prevOper === "+") {
-    result = num1 + num2;
-  } else if (prevOper === "−") {
-    result = num1 - num2;
-  } else if (prevOper === "/") {
-    if (num2 === 0) {
-      result = "Error";
-    } else {
-      result = num1 / num2;
-    }
-  } else if (prevOper === "×") {
-    result = num1 * num2;
+  switch (prevOper) {
+    case "+":
+      result = num1 + num2;
+      break;
+    case "−":
+      result = num1 - num2;
+      break;
+    case "/":
+      if (num2 === 0) {
+        result = "Error";
+      } else {
+        result = num1 / num2;``
+      }
+      break;
+    case "×":
+      result = num1 * num2;
   }
   if (result === undefined) {
     result = "Error";
